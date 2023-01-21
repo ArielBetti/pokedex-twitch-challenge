@@ -4,7 +4,7 @@ import { useId, useMemo } from "react";
 import type { TInput } from "./types";
 
 // ::
-const Input = ({ label, feedback, className, ...rest }: TInput) => {
+const Input = ({ label, className, ...rest }: TInput) => {
   const inputId = useId();
 
   return (
