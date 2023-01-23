@@ -1,3 +1,6 @@
+// pokemon types
+import pokemonType from './pokemonTypes';
+
 // icons
 import { ExclamationCircleIcon } from "@heroicons/react/24/solid";
 
@@ -5,7 +8,7 @@ import { ExclamationCircleIcon } from "@heroicons/react/24/solid";
 import { useGetPokemonQuery } from "../../queries"
 
 // components
-import { Button } from "..";
+import { Button, Chart, Modal } from "..";
 
 // types
 import type { TPokeCardProps } from "./types"
@@ -69,20 +72,50 @@ const PokeCard = ({ url }: TPokeCardProps) => {
   if (!data?.id) return null;
 
   return (
-    <div className="h-24 text-white motion-safe:animate-fadeIn transition-colors dark:bg-illusion-4 bg-illusion-5 border dark:border-illusion-3 border-illusion-2 rounded-sm md:max-w-xs flex items-center justify-start gap-3 w-full p-4 shadow-sm dark:hover:bg-illusion-3 hover:bg-illusion-4">
-      <img
-        alt={`Imagem do pokémon ${data?.name}`}
-        src={data?.sprites?.versions?.["generation-v"]?.["black-white"]?.animated.front_default || data?.sprites?.other?.["official-artwork"]?.front_default}
-        className="w-16 h-16" />
-      <div className="flex flex-col flex-wrap items-start justify-start">
-        <h2 className="text-lg font-semibold capitalize">
-          {data?.name}
-        </h2>
-        <p className="text-xs text-green-400">
-          EXP: {data?.base_experience}
-        </p>
+    <Modal
+      title={data?.name}
+      modalTrigger={
+        <button className="h-24 text-white motion-safe:animate-fadeIn transition-colors dark:bg-illusion-4 bg-illusion-5 border dark:border-illusion-3 border-illusion-2 rounded-sm md:max-w-xs flex items-center justify-start gap-3 w-full p-4 shadow-sm dark:hover:bg-illusion-3 hover:bg-illusion-4">
+          <img
+            alt={`Imagem do pokémon ${data?.name}`}
+            src={data?.sprites?.versions?.["generation-v"]?.["black-white"]?.animated.front_default || data?.sprites?.other?.["official-artwork"]?.front_default}
+            className="w-16 h-16" />
+          <div className="flex flex-col flex-wrap items-start justify-start">
+            <h2 className="text-lg font-semibold capitalize">
+              {data?.name}
+            </h2>
+            <p className="text-xs text-green-400">
+              EXP: {data?.base_experience}
+            </p>
+          </div>
+        </button>
+      }>
+      <div className="flex flex-col items-start justify-start">
+        <div className="w-full min-h-[400px] flex flex-wrap gap-5 items-center justify-center">
+          <div className="flex items-center justify-center flex-col gap-5">
+            <img className="h-52 w-52" src={data?.sprites?.other?.home?.front_default || data?.sprites?.other?.["official-artwork"]?.front_default} alt="" />
+            <div className='flex gap-2 flex-wrap'>
+              {data?.types?.map((type) => (
+                <div className="p-2 rounded-md shadow-lg font-semibold" style={{ backgroundColor: `${pokemonType?.[type?.type.name]}` }}>
+                  {type?.type.name}
+                </div>
+              ))}
+            </div>
+          </div>
+          <div className="md:h-80 md:w-80 h-64 w-64 text-white">
+            <Chart
+              data={data?.stats?.map((item) => (
+                {
+                  name: item.stat?.name,
+                  stat: item?.base_stat,
+                }
+              ))}
+            />
+          </div>
+        </div>
       </div>
-    </div>
+    </Modal>
+
   )
 }
 
