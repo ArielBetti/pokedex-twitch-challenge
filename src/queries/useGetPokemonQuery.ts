@@ -18,6 +18,7 @@ export const useGetPokemonQuery = (uri: string) => {
     queryKey: [uri],
     queryFn: () => dynamicRequest(),
     refetchOnWindowFocus: false,
+    enabled: !!uri,
   })
 };
 

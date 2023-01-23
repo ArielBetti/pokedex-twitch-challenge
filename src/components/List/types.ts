@@ -3,4 +3,5 @@ import { TPokemonListEndpoint, TPokemonListEndpointResult } from "../../interfac
 
 export type TListProps = {
   list: InfiniteData<TPokemonListEndpoint> | undefined;
+  isError: boolean,
 }
