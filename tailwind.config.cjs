@@ -50,6 +50,10 @@ module.exports = {
         primary: '#ff7900'
       },
       keyframes: {
+        infinityParallax: {
+          "0%, 100%": { backgroundPosition: "0px 0px" },
+          "100%": { backgroundPosition: "300px 300px" },
+        },
         blurIn: {
           "0%, 100%": { backdropFilter: "blur(1px)" },
           "100%": { backdropFilter: "blur(5px)" },
@@ -96,12 +100,12 @@ module.exports = {
         },
         rightSlide: {
           "0%": {
-            transform: "translateX(0px)",
-            opacity: 1,
+            transform: "translateX(-20px)",
+            opacity: 0,
           },
           "100%": {
-            transform: "translateX(20px)",
-            opacity: 0,
+            transform: "translateX(0px)",
+            opacity: 1,
           },
         },
         hide: {
@@ -121,6 +125,7 @@ module.exports = {
         rightSlide: "rightSlide 0.25s ease forwards",
         upSlide: "upSlide 0.25s ease forwards",
         hide: "hide 0.25s  ease forwards",
+        infinityParallax: "infinityParallax 18s linear infinite",
       },
     },
   },
