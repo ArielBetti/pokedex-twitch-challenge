@@ -20,7 +20,7 @@ const ThemeToggle = () => {
   return (
     <Toggle.Root
       aria-label="Toggle theme"
-      className="h-10 transition-colors flex bg-illusion-4 border border-illusion-3 justify-center items-center gap-2 w-10 rounded-md p-2 text-white shadow-md"
+      className="h-10 transition-colors flex dark:bg-illusion-4 bg-illusion-3 border dark:border-illusion-3 border-illusion-2 hover:bg-illusion-2 dark:hover:bg-illusion-3 justify-center items-center gap-2 w-10 rounded-md p-2 text-white shadow-md"
       onClick={() => onToggle()}
     >
       {theme === "light" ? (
