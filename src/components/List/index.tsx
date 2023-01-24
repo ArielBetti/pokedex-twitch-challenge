@@ -1,4 +1,3 @@
-
 // types
 import type { TListProps } from './types';
 
@@ -15,7 +14,6 @@ const List = ({ list }: TListProps) => {
         <PokeCard url={pokemon.url} key={pokemon.url} />
       )))}
     </div>
-
   )
 }
 
