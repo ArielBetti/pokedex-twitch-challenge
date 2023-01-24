@@ -1,3 +1,5 @@
+import { isAxiosError } from "axios";
+
 // pokemon types
 import pokemonType from './pokemonTypes';
 
@@ -12,7 +14,7 @@ import { Button, Chart, Modal } from "..";
 
 // types
 import type { TPokeCardProps } from "./types"
-import { isAxiosError } from "axios";
+
 
 // ::
 const PokeCard = ({ url }: TPokeCardProps) => {
@@ -60,13 +62,14 @@ const PokeCard = ({ url }: TPokeCardProps) => {
   if (!isFetching && !data?.id) return null;
 
   return (
-    <div className="h-24 flex items-center text-white motion-safe:animate-fadeIn transition-colors dark:bg-illusion-4 bg-illusion-5 border dark:border-illusion-3 border-illusion-2 rounded-sm md:max-w-xs justify-start gap-3 w-full p-4 shadow-sm dark:hover:bg-illusion-3 hover:bg-illusion-4">
+    <div className="h-24 flex items-center text-white motion-safe:animate-fadeIn transition-colors dark:bg-illusion-4 bg-illusion-5 border dark:border-illusion-3 border-illusion-2 rounded-sm md:max-w-xs justify-start gap-3 w-full shadow-sm dark:hover:bg-illusion-3 hover:bg-illusion-4">
       {data?.id && !isFetching ? (
         <Modal
           title={`${data?.name}`}
           modalTrigger={
-            <button className="flex items-center justify-center gap-2">
+            <button className="w-full flex items-center justify-start gap-2 p-4">
               <img
+                loading="lazy"
                 alt={`Imagem do pokémon ${data?.name}`}
                 src={data?.sprites?.versions?.["generation-v"]?.["black-white"]?.animated.front_default || data?.sprites?.other?.["official-artwork"]?.front_default}
                 className="w-16 h-16" />
@@ -83,10 +86,10 @@ const PokeCard = ({ url }: TPokeCardProps) => {
           <div className="flex flex-col items-start justify-start">
             <div className="w-full min-h-[400px] flex flex-wrap gap-5 items-center justify-center">
               <div className="flex items-center justify-center flex-col gap-5">
-                <img className="h-52 w-52" src={data?.sprites?.other?.home?.front_default || data?.sprites?.other?.["official-artwork"]?.front_default} alt="" />
+                <img loading="lazy" className="h-52 w-52" src={data?.sprites?.other?.home?.front_default || data?.sprites?.other?.["official-artwork"]?.front_default} alt="" />
                 <div className='flex gap-2 flex-wrap'>
-                  {data?.types?.map((type) => (
-                    <div className="p-2 rounded-md shadow-lg font-semibold" style={{ backgroundColor: `${pokemonType?.[type?.type.name]}` }}>
+                  {data?.types?.map((type, index) => (
+                    <div key={`${type.type.name}-${index}`} className="p-2 rounded-md shadow-lg font-semibold" style={{ backgroundColor: `${pokemonType?.[type?.type.name]}` }}>
                       {type?.type.name}
                     </div>
                   ))}
@@ -106,7 +109,7 @@ const PokeCard = ({ url }: TPokeCardProps) => {
           </div>
         </Modal>
       ) : (
-        <div className="animate-pulse flex space-x-4 items-center justify-center">
+        <div className="animate-pulse flex space-x-4 items-center justify-center p-4">
           <div className="rounded-full bg-illusion-2 h-10 w-10"></div>
           <div className="flex-1 items-center w-full">
             <div className="h-3 w-40 bg-illusion-2 rounded"></div>
