@@ -9,20 +9,21 @@ import { TChartProps } from './types';
 // ::
 const Chart = ({ data }: TChartProps) => (
   <ResponsiveRadar
+    fillOpacity={0.70}
     data={data}
     keys={['stat']}
     indexBy="name"
-    valueFormat=">-.2f"
-    margin={{ top: 70, right: 80, bottom: 40, left: 80 }}
+    gridLabel={() => <></>}
+    margin={{ top: 10, right: 10, bottom: 10, left: 10 }}
     borderColor={{ from: 'color' }}
-    gridLabelOffset={36}
     dotSize={10}
     dotColor={{ theme: 'background' }}
     dotBorderWidth={2}
-    colors={{ scheme: 'paired' }}
+    colors={{ scheme: 'accent' }}
     theme={theme}
-    blendMode="multiply"
+    blendMode="normal"
     motionConfig="wobbly"
+    gridShape="linear"
   />
 )
 

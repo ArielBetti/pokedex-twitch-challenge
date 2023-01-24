@@ -86,7 +86,7 @@ const PokeCard = ({ url }: TPokeCardProps) => {
           <div className="flex flex-col items-start justify-start">
             <div className="w-full min-h-[400px] flex flex-wrap gap-5 items-center justify-center">
               <div className="flex items-center justify-center flex-col gap-5">
-                <img loading="lazy" className="h-52 w-52" src={data?.sprites?.other?.home?.front_default || data?.sprites?.other?.["official-artwork"]?.front_default} alt="" />
+                <img loading="lazy" className="h-52 w-52" src={data?.sprites?.other?.home?.front_default || data?.sprites?.other?.["official-artwork"]?.front_default} alt={`Pokémon ${data?.name}`} />
                 <div className='flex gap-2 flex-wrap'>
                   {data?.types?.map((type, index) => (
                     <div key={`${type.type.name}-${index}`} className="p-2 rounded-md shadow-lg font-semibold" style={{ backgroundColor: `${pokemonType?.[type?.type.name]}` }}>
@@ -95,7 +95,7 @@ const PokeCard = ({ url }: TPokeCardProps) => {
                   ))}
                 </div>
               </div>
-              <div className="md:h-80 md:w-80 h-64 w-64 text-white">
+              <div className="md:h-72 md:w-72 h-60 w-60">
                 <Chart
                   data={data?.stats?.map((item) => (
                     {
