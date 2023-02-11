@@ -1,4 +1,4 @@
-import { useId, useMemo } from "react";
+import { useId } from "react";
 
 // types
 import type { TInput } from "./types";
@@ -8,7 +8,9 @@ const Input = ({ label, className, ...rest }: TInput) => {
   const inputId = useId();
 
   return (
-    <div className={`${className} flex flex-col justify-start items-start w-full gap-2`}>
+    <div
+      className={`${className} flex flex-col justify-start items-start w-full gap-2`}
+    >
       {label && (
         <label className="" htmlFor={inputId}>
           {label}
